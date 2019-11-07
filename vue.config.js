@@ -23,10 +23,10 @@ module.exports = {
     sourceMap: true,
     loaderOptions: {
       sass: {
-        data: `@import "@/assets/style/empty/empty.sass"`
+        // data: `@import "@/assets/style/empty/empty.sass"`
       },
       scss: {
-        data: `@import "@/assets/style/empty/empty.scss"; @import "@/assets/style/_variables.scss";`
+        // data: `@import "@/assets/style/empty/empty.scss"; @import "@/assets/style/_variables.scss";`
       }
     }
   }
