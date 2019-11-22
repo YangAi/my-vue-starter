@@ -10,6 +10,5 @@ export default {
 
 <style lang="scss" scoped>
     main {
-        font-size: $baseFont
     }
 </style>
