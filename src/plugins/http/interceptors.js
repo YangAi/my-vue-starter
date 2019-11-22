@@ -19,7 +19,7 @@ export default http => {
         // 如果 header 中存在 token，那么触发 refreshToken 方法，替换本地的 token
         Auth.setToken(token)
       }
-      return response.data
+      return isEmpty(response.data) ? true : response.data
     },
     async error => {
       if (!error['response']) {

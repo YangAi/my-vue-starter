@@ -5,7 +5,7 @@ import localforage from 'localforage'
 import { isEmpty, trim, replace } from 'lodash'
 import utils from '@utils/client'
 import { setToken as setAjaxToken } from '@/plugins/http'
-// import noty from 'noty'
+import Toast from '@plugins/noty'
 
 export function loginCheck (payload) {
   if ((!payload.phone && !payload.email && !payload.account) || (!payload.password && !payload.code)) {
@@ -44,7 +44,7 @@ export function loginCheck (payload) {
 
 export default {
   get token () {
-    return vuex.state.auth.user
+    return isEmpty(vuex.state.auth.token) ? false : vuex.state.auth.token
   },
   get loggedIn () {
     return !!this.token
@@ -68,6 +68,7 @@ export default {
     let res = await api.auth.destroy()
     if (res) {
       await this.removeToken()
+      return res
       // Toast.success('Logout Success!')
       // !TODO might have bug with router refresh
       router.go(-1)
@@ -75,7 +76,7 @@ export default {
   },
   async setUser (res) {
     if (!res) {
-      res = await api.me.get()
+      res = await api.me.index()
     }
     vuex.dispatch('setUser', res)
   },
@@ -90,8 +91,8 @@ export default {
       return this.token
     } else {
       let token = await localforage.getItem('token')
-      await this.setToken(token)
       if (token) {
+        await this.setToken(token)
         return token
       } else {
         return false
@@ -99,7 +100,6 @@ export default {
     }
   },
   async setToken (token = false) {
-    console.log(token)
     if (!token) {
       return this.removeToken()
     }
