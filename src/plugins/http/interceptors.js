@@ -1,6 +1,6 @@
 import Noty from '@plugins/noty.js'
 import Auth from '@/plugins/auth'
-import {isEmpty} from 'lodash'
+import { isEmpty } from 'lodash'
 
 export default http => {
   http.interceptors.request.use(

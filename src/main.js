@@ -8,6 +8,7 @@ import '@plugins/nprogress'
 import '@plugins/prototypes'
 
 import '@style/index.scss'
+import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
