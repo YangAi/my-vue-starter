@@ -6,6 +6,7 @@ import { isEmpty, trim, replace } from 'lodash'
 import utils from '@utils/client'
 import { setToken as setAjaxToken } from '@/plugins/http'
 import Toast from '@plugins/noty'
+import config from '@/config'
 
 export function loginCheck (payload) {
   if ((!payload.phone && !payload.email && !payload.account) || (!payload.password && !payload.code)) {
@@ -56,22 +57,21 @@ export default {
     const params = loginCheck(payload)
     if (!params) return false
 
-    let res = await api.auth.store(params)
-    console.log(res)
+    let res = await api[config.authResource].store(params)
     if (res) {
       this.setToken(res.token)
-      // Toast.success('Success!')
+      Toast.success('Welcome Back!')
       return res
     }
   },
   async logout () {
-    let res = await api.auth.destroy()
+    let res = await api[config.authResource].destroy()
     if (res) {
       await this.removeToken()
       return res
       // Toast.success('Logout Success!')
       // !TODO might have bug with router refresh
-      router.go(-1)
+      // router.go(-1)
     }
   },
   async setUser (res) {
