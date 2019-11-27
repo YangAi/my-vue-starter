@@ -27,6 +27,13 @@ vue add vuetify
 vue add electron-builder
 ```
 
+## Keep Vuetify and tailwind consist
+```
+Grid Breakpoints:
+https://stackoverflow.com/questions/57333274/how-to-change-breakpoints-in-the-scss-in-vuetify-v2
+```
+
+
 ### Before start
 ```
 Import proper global notification component.('plugins/http/interceptor', 'plugins/auth', 'router/beforeEach')
