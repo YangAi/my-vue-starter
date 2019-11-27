@@ -1,26 +1,35 @@
 import NProgress from 'nprogress'
 // import { isEmpty } from 'lodash'
 import Auth from '@/plugins/auth'
+import Toast from '@plugins/noty'
 
 const beforeEach = async (to, from, next) => {
   NProgress.start()
 
-  if (!to.meta.auth) return next()
+  // access control for dashboard
+  if (process.env.VUE_APP_SOURCE === 'dashboard') {
+    if (to.meta.auth === false) return next()
 
-  await Auth.getToken()
+    await Auth.getToken()
 
-  if (Auth.token && Auth.user) {
-    // const hasScope = await Auth.hasScope('is_admin')
-    // if (!hasScope) {
-    //   Toast.error('账号没有权限。')
-    //   Auth.logout()
-    // return next({ name: 'auth.login' }) // redirect to login
-    // }
-    next()
+    if (Auth.token && Auth.user) {
+      console.log(Auth.user)
+      const hasRole = await Auth.hasRole(['super admin', 'yo'])
+      console.log('has roles', hasRole)
+      if (!hasRole) {
+        Toast.error('The account has no permission.')
+        Auth.logout()
+        return next({ name: 'Auth.Login' }) // redirect to login
+      }
+      return next()
+    } else {
+      Toast.error('Please login first.')
+    }
+
+    return next({ name: 'Auth.Login' }) // redirect to login
   }
 
-  // Toast.error('Please logi fist')
-  return next({ name: 'auth.login' }) // redirect to login
+  return next()
 }
 
 export default beforeEach
