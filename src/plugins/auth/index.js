@@ -68,8 +68,8 @@ export default {
     let res = await api[config.authResource].destroy()
     if (res) {
       await this.removeToken()
+      Toast.success('Logout Success!')
       return res
-      // Toast.success('Logout Success!')
       // !TODO might have bug with router refresh
       // router.go(-1)
     }
@@ -85,6 +85,22 @@ export default {
       await this.setUser()
     }
     return this.user[scope]
+  },
+  async hasRole (acceptedRoles = 'super admin') {
+    if (isEmpty(this.user)) {
+      await this.setUser()
+    }
+    switch (typeof acceptedRoles) {
+      case 'string':
+        return !!find(this.user.roles, { name: acceptedRoles })
+      case 'object':
+        return !!find(this.user.roles, function (o) {
+          return acceptedRoles.indexOf(o.name) >= 0
+        })
+      default:
+        Toast.error('Error!')
+        return false
+    }
   },
   async getToken () {
     if (this.token) {
