@@ -7,9 +7,7 @@ const http = axios.create({
   baseURL: config.apiUri,
   timeout: 100000,
   headers: {
-    source: config.source,
-    'X-Requested-With': 'XMLHttpRequest',
-    'Access-Control-Allow-Origin': '*'
+    source: config.source
   }
 })
 
