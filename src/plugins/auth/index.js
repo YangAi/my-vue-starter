@@ -7,20 +7,21 @@ import { isEmpty, trim, replace } from 'lodash'
 import utils from '@utils/client'
 import { setToken as setAjaxToken } from '@/plugins/http'
 import config from '@/config'
+import i18n from '@/locales'
 
 export function loginCheck (payload) {
   if ((!payload.phone && !payload.email && !payload.account && !payload.username) || (!payload.password && !payload.code)) {
-    Vue.$toast.error(config.messages.auth.error.required)
+    Vue.$toast.error(i18n.t('messages.auth.error.required'))
     return false
   }
 
   if (payload.email && !utils.isEmail(payload.email)) {
-    Vue.$toast.error(config.messages.auth.error.email)
+    Vue.$toast.error(i18n.t('messages.auth.error.email'))
     return false
   }
 
   if (payload.phone && !utils.isPhone(payload.phone)) {
-    Vue.$toast.error(config.messages.auth.error.phone)
+    Vue.$toast.error(i18n.t('messages.auth.error.phone'))
     return false
   }
 
@@ -45,7 +46,7 @@ export function loginCheck (payload) {
   } else if (payload.code && utils.isCode(payload.code)) {
     params.code = payload.code
   } else {
-    Vue.$toast.error(config.messages.auth.error.password)
+    Vue.$toast.error(i18n.t('messages.auth.error.password'))
     return false
   }
 
@@ -68,7 +69,7 @@ export default {
     let res = await api[config.authResource].store(params)
     if (res) {
       this.setToken(res.token || res.access_token || res.data.token || res.data.access_token)
-      Vue.$toast.success(config.messages.auth.welcomeBack)
+      Vue.$toast.success(i18n.t('messages.auth.welcomeBack'))
       return res
     }
   },
@@ -76,7 +77,7 @@ export default {
     let res = await api[config.authResource].destroy('')
     if (res) {
       await this.removeToken()
-      Vue.$toast.success(config.messages.auth.logout)
+      Vue.$toast.success(i18n.t('messages.auth.logout'))
       return res
       // TODO might have bug with router refresh
       // router.go(0)

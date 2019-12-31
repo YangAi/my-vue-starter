@@ -1,7 +1,7 @@
 export default [
   {
     path: '/auth/login',
-    component: () => import('./Login.vue'),
+    component: () => import('./LoginFront.vue'),
     name: 'Auth.Login',
     meta: {
       auth: false,

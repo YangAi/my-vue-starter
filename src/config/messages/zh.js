@@ -1,13 +1,13 @@
 export default {
   login: {
-    title: '后台登录',
+    title: '登录/注册',
     label: {
       account: '账号',
       password: '密码'
     },
     buttons: {
       login: '登录',
-      goBack: 'Go to front page'
+      goBack: '返回首页'
     },
     wrong: '请输入正确的账号和密码。'
   },
@@ -37,6 +37,7 @@ export default {
     isCountMatch: '长度不相符。',
     isDate: '不是有效日期。',
     isTime: '不是有效时间',
+    isEmail: '',
     isMax: 'The input is exceed the maximum limit.',
     isMin: 'The input is smaller the minimum limit.',
     isInRange: 'The input is not in a valid range.'

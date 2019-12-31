@@ -1,5 +1,11 @@
 import Resource from './resource'
+import config from '@/config'
 
-export default {
-  items: new Resource('/items')
+let resource = {
+  me: new Resource('/me')
+  // events: new Resource('/events')
 }
+
+resource[config.authResource] = new Resource('/' + config.authResource)
+
+export default resource

@@ -1,4 +1,4 @@
-const alias = require('./alias.config')
+const alias = require('./alias.config').resolve.alias
 
 module.exports = {
   'configureWebpack': {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Auth from '@/plugins/auth'
 import { isEmpty } from 'lodash'
-import config from '@/config'
+import i18n from '@/locales'
 
 export default http => {
   http.interceptors.request.use(
@@ -29,19 +29,19 @@ export default http => {
       }
       switch (error.response.status) {
         case 401:
-          Vue.$toast.error(error.response.data.message || config.messages.http.error401)
+          Vue.$toast.error(error.response.data.message || i18n.t('messages.http.error401'))
           Auth.logout()
           break
         case 403:
-          Vue.$toast.error(error.response.data.message || config.messages.http.error403)
+          Vue.$toast.error(error.response.data.message || i18n.t('messages.http.error403'))
           break
         case 500:
         case 501:
         case 503:
-          Vue.$toast.error(error.response.data.message || config.messages.http.error500)
+          Vue.$toast.error(error.response.data.message || i18n.t('messages.http.error500'))
           break
         default:
-          Vue.$toast.error(error.response.data.message || config.messages.http.errorDefault)
+          Vue.$toast.error(error.response.data.message || i18n.t('messages.http.errorDefault'))
           break
       }
 

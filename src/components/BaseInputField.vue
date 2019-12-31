@@ -1,57 +1,66 @@
 <template>
-  <base-text-field v-if="this.fields.type !== 'datetime'"
-                v-bind="$attrs"
-                v-model="innerValue"
-                :label="fields.label"
-                :prefix="fields.prefix || ''"
-                :suffix="fields.suffix || ''"
-                :hint="fields.hint || ''"
-                :rules="fields.rules || []"
-                :disabled="!!fields.disabled"
-                @blur="fields.blur || null"/>
-  <v-datetime-picker v-else
-                     v-bind="$attrs"
-                     v-model="innerValue"
-                     :fields="fieldsChild" />
+  <component :is="componentName"
+             v-model="innerValue"
+             :field="field"
+             :label="field.text"
+             :prefix="field.prefix || ''"
+             :suffix="field.suffix || ''"
+             :hint="field.hint || ''"
+             :rules="field.rules || []"
+             :disabled="!!field.disabled && !forFilter"
+             v-bind="$attrs"
+  />
 </template>
 
 <script>
+import CheckboxField from './inputFields/CheckboxField'
+import DateField from './inputFields/DateField'
+import DatetimeField from './inputFields/DatetimeField'
+import RichtextField from './inputFields/RichtextField'
+import SelectField from './inputFields/SelectField'
+import SliderField from './inputFields/SliderField'
+import TextareaField from './inputFields/TextareaField'
+import TextField from './inputFields/TextField'
+import TimeField from './inputFields/TimeField'
+import PasswordField from './inputFields/PasswordField'
+import baseMixins from './inputFields/baseMixins'
 export default {
-  name: 'BaseInputField',
+  name: 'CrudInputField',
   props: {
-    value: {},
-    fields: {
-      type: Object,
-      default: () => {
-        return {
-          type: 'string'
-        }
-      }
+    forFilter: {
+      type: Boolean,
+      default: false
     }
   },
-  created () {
-    if (this.fields.type === 'datetime') {
-      this.fieldsChild = this._.cloneDeep(this.fields)
-      this.fieldsChild.type = 'string'
-    }
-  },
+  components: { TimeField, TextField, TextareaField, SliderField, SelectField, RichtextField, DatetimeField, DateField, CheckboxField, PasswordField },
+  mixins: [baseMixins],
   computed: {
-    innerValue: {
-      get () {
-        return this.value
-      },
-      set (val) {
-        this.$emit('input', val)
+    formattedType () {
+      return this._.toLower(this.field.type)
+    },
+    componentName () {
+      // only for filter
+      if (this.forFilter) {
+        if (['checkbox', 'date', 'datetime', 'select', 'time'].includes(this.formattedType)) {
+          return this.formattedType + '-field'
+        }
+        return 'text-field'
       }
-    }
-  },
-  data () {
-    return {
-      fieldsChild: []
+      if (['checkbox', 'date', 'datetime', 'richtext', 'select', 'slider', 'textarea', 'time'].includes(this.formattedType)) {
+        return this.formattedType + '-field'
+      }
+      if (this.formattedType === 'boolean') {
+        return 'checkbox-field'
+      }
+      if (this.formattedType === 'html') {
+        return 'richtext-field'
+      }
+      return 'text-field'
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 </style>

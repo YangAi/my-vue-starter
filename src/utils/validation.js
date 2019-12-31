@@ -1,15 +1,15 @@
 import dayjs from 'dayjs'
 import { isNumber } from 'lodash'
 import utils from '@utils/client'
-import config from '@/config'
+import i18n from '@/locales'
 
 export default {
-  isRequired: value => !!value || config.messages.validation.isRequired,
-  isNumber: value => isNumber(value) || config.messages.validation.isNumber,
-  isCountMatch: (value, count) => value.length === count || config.messages.validation.isCountMatch,
-  isDate: value => dayjs(value, utils.inputFormat.date).format(utils.inputFormat.date) === value || config.messages.validation.isDate,
-  isTime: value => dayjs(`2000-01-01 ${value}`, utils.inputFormat.time).format(utils.inputFormat.time) === value || config.messages.validation.isTime,
-  isMax: (value, max) => isNumber(value) && isNumber(max) ? (value <= max || config.messages.validation.isMax) : config.messages.validation.isNumber,
-  isMin: (value, min) => isNumber(value) && isNumber(min) ? (value >= min || config.messages.validation.isMin) : config.messages.validation.isNumber,
-  isInRange: (value, min, max) => isNumber(value) && isNumber(min) && isNumber(max) ? ((value >= min && value <= max) || config.messages.validation.isInRange) : config.messages.validation.isNumber
+  isRequired: value => !!value || i18n.t('validation.isRequired'),
+  isNumber: value => isNumber(value) || i18n.t('validation.isNumber'),
+  isCountMatch: (value, count) => value.length === count || i18n.t('validation.isCountMatch'),
+  isDate: value => dayjs(value, utils.inputFormat.date).format(utils.inputFormat.date) === value || i18n.t('validation.isDate'),
+  isTime: value => dayjs(`2000-01-01 ${value}`, utils.inputFormat.time).format(utils.inputFormat.time) === value || i18n.t('validation.isTime'),
+  isMax: (value, max) => isNumber(value) && isNumber(max) ? (value <= max || i18n.t('validation.isMax')) : i18n.t('validation.isNumber'),
+  isMin: (value, min) => isNumber(value) && isNumber(min) ? (value >= min || i18n.t('validation.isMin')) : i18n.t('validation.isNumber'),
+  isInRange: (value, min, max) => isNumber(value) && isNumber(min) && isNumber(max) ? ((value >= min && value <= max) || i18n.t('validation.isInRange')) : i18n.t('validation.isNumber')
 }
