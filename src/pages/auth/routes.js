@@ -4,8 +4,8 @@ export default [
     component: () => import('./Login.vue'),
     name: 'Auth.Login',
     meta: {
-      title: 'Login',
-      auth: false
+      auth: false,
+      title: 'Login'
     }
   }
 ]

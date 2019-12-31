@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import vuex from './vuex'
 import api from '@/services/api'
 import router from '@/router'
@@ -5,23 +6,29 @@ import localforage from 'localforage'
 import { isEmpty, trim, replace } from 'lodash'
 import utils from '@utils/client'
 import { setToken as setAjaxToken } from '@/plugins/http'
-import Toast from '@plugins/noty'
 import config from '@/config'
 
 export function loginCheck (payload) {
-  if ((!payload.phone && !payload.email && !payload.account) || (!payload.password && !payload.code)) {
+  if ((!payload.phone && !payload.email && !payload.account && !payload.username) || (!payload.password && !payload.code)) {
+    Vue.$toast.error(config.messages.auth.error.required)
     return false
   }
 
   if (payload.email && !utils.isEmail(payload.email)) {
+    Vue.$toast.error(config.messages.auth.error.email)
     return false
   }
 
   if (payload.phone && !utils.isPhone(payload.phone)) {
+    Vue.$toast.error(config.messages.auth.error.phone)
     return false
   }
 
   let params = {}
+
+  if (payload.username) {
+    params.username = payload.username
+  }
 
   if (payload.account) {
     if (utils.isEmail(payload.account)) {
@@ -38,8 +45,10 @@ export function loginCheck (payload) {
   } else if (payload.code && utils.isCode(payload.code)) {
     params.code = payload.code
   } else {
+    Vue.$toast.error(config.messages.auth.error.password)
     return false
   }
+
   return params
 }
 
@@ -56,29 +65,28 @@ export default {
   async login (payload) {
     const params = loginCheck(payload)
     if (!params) return false
-
     let res = await api[config.authResource].store(params)
     if (res) {
-      this.setToken(res.token)
-      Toast.success('Welcome Back!')
+      this.setToken(res.token || res.access_token || res.data.token || res.data.access_token)
+      Vue.$toast.success(config.messages.auth.welcomeBack)
       return res
     }
   },
   async logout () {
-    let res = await api[config.authResource].destroy()
+    let res = await api[config.authResource].destroy('')
     if (res) {
       await this.removeToken()
-      Toast.success('Logout Success!')
+      Vue.$toast.success(config.messages.auth.logout)
       return res
-      // !TODO might have bug with router refresh
-      // router.go(-1)
+      // TODO might have bug with router refresh
+      // router.go(0)
     }
   },
   async setUser (res) {
     if (!res) {
       res = await api.me.index()
     }
-    vuex.dispatch('setUser', res)
+    vuex.dispatch('setUser', res.data || res)
   },
   async hasScope (scope = 'is_admin') {
     if (isEmpty(this.user)) {
@@ -98,7 +106,7 @@ export default {
           return acceptedRoles.indexOf(o.name) >= 0
         })
       default:
-        Toast.error('Error!')
+        Vue.$toast.error('Error!')
         return false
     }
   },

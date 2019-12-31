@@ -1,6 +1,7 @@
-import Noty from '@plugins/noty.js'
+import Vue from 'vue'
 import Auth from '@/plugins/auth'
 import { isEmpty } from 'lodash'
+import config from '@/config'
 
 export default http => {
   http.interceptors.request.use(
@@ -26,27 +27,22 @@ export default http => {
       if (!error['response']) {
         return Promise.reject(error)
       }
-
-      if (error.response.data.message) {
-        Noty.error(error.response.data.message)
-      } else {
-        switch (error.response.status) {
-          case 401:
-            Noty.error('无权访问，请重新登录。')
-            Auth.logout()
-            break
-          case 403:
-            Noty.error('您没有此操作权限！')
-            break
-          case 500:
-          case 501:
-          case 503:
-            Noty.error('服务器出了点小问题，请联系技术支持！')
-            break
-          default:
-            Noty.error('连接错误，请稍后再试')
-            break
-        }
+      switch (error.response.status) {
+        case 401:
+          Vue.$toast.error(error.response.data.message || config.messages.http.error401)
+          Auth.logout()
+          break
+        case 403:
+          Vue.$toast.error(error.response.data.message || config.messages.http.error403)
+          break
+        case 500:
+        case 501:
+        case 503:
+          Vue.$toast.error(error.response.data.message || config.messages.http.error500)
+          break
+        default:
+          Vue.$toast.error(error.response.data.message || config.messages.http.errorDefault)
+          break
       }
 
       return Promise.reject(error.response)
