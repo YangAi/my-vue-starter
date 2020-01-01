@@ -97,15 +97,20 @@ export default {
   },
   async setPermissions () {
     if (!this.permissions) {
-      let permissions = []
+      let permissions = {}
       const res = await api.me.get('permissions')
-      if (res.data) {
-        forEach(res.data[1], (roles) => {
-          permissions = concat(permissions, roles.permissions)
+      if (res.code === 0) {
+        forEach(res.data, (group, key) => {
+          permissions[key] = []
+          forEach(group, (roles) => {
+            permissions[key] = concat(permissions[key], roles.permissions)
+          })
+          permissions[key] = uniqBy(permissions[key], 'id')
         })
-        permissions = uniqBy(permissions, 'id')
+        await vuex.dispatch('setPermissions', permissions)
+      } else {
+        Vue.$toast.error(res.message)
       }
-      await vuex.dispatch('setPermissions', permissions)
     }
   },
   async hasScope (scope = 'is_admin') {

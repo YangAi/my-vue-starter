@@ -15,6 +15,12 @@ export default {
   },
   async created () {
     if (this.$auth.permission) {}
+  },
+  data () {
+    return {
+      loading: true,
+      verified: false
+    }
   }
 }
 </script>
