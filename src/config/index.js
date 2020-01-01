@@ -3,6 +3,7 @@ import messages from './messages'
 export default {
   apiUri: process.env.VUE_APP_API_URL,
   authResource: process.env.VUE_APP_AUTH_RESOURCE,
+  hasPermissions: process.env.VUE_APP_HAS_PERMISSIONS,
   source: process.env.VUE_APP_SOURCE,
   language: process.env.VUE_APP_LANGUAGE,
   appName: '本地宝_V1',

@@ -1,5 +1,11 @@
 import { isEmpty } from 'lodash'
 
+export const setPermissions = ({ commit }, permissions) => {
+  commit('Auth//SET_PERMISSIONS', permissions)
+
+  Promise.resolve(permissions)
+}
+
 export const setUser = ({ commit }, user) => {
   // Commit the mutations
   commit('Auth//SET_USER', user)

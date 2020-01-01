@@ -1,7 +1,7 @@
+import Vue from 'vue'
 import NProgress from 'nprogress'
 // import { isEmpty } from 'lodash'
 import Auth from '@/plugins/auth'
-import Toast from '@plugins/noty'
 
 const beforeEach = async (to, from, next) => {
   NProgress.start()
@@ -17,13 +17,13 @@ const beforeEach = async (to, from, next) => {
       const hasRole = await Auth.hasRole(['super admin', 'yo'])
       console.log('has roles', hasRole)
       if (!hasRole) {
-        Toast.error('The account has no permission.')
-        Auth.logout()
+        Vue.$toast.error('The account has no permission.')
+        await Auth.logout()
         return next({ name: 'Auth.Login' }) // redirect to login
       }
       return next()
     } else {
-      Toast.error('Please login first.')
+      Vue.$toast.error('Please login first.')
     }
 
     return next({ name: 'Auth.Login' }) // redirect to login

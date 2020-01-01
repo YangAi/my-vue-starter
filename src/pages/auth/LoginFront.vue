@@ -13,7 +13,7 @@
         <v-container class="tw-mt-4 md:tw-mt-32 tw-p-8 lg:tw-pl-12">
           <h1 class="display-1 tw-mb-4">{{ $t('pages.login.title') }}</h1>
           <v-form ref="form" style="max-width: 300px">
-            <v-text-field v-model="form.email"
+            <v-text-field v-model="form.account"
                           :label="$t('pages.login.label.email')"
                           :rules="[rules.isRequired]"
                           @blur="emailCheck"/>
@@ -45,7 +45,7 @@ export default {
       loading: false,
       showPassword: false,
       form: {
-        email: '',
+        account: '',
         password: ''
       },
       rules: rules
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     emailCheck () {
-      if (!this.$utils.isEmail(this.form.email)) return this.$toast.error('')
+      if (!this.$utils.isEmail(this.form.account)) return this.$toast.info('邮箱处理未实装。')
     },
     async submit () {
       if (!this.$refs.form.validate()) return this.$toast.error(this.$t('messages.auth.error.form'))

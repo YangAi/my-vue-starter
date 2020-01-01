@@ -3,7 +3,7 @@ import vuex from './vuex'
 import api from '@/services/api'
 import router from '@/router'
 import localforage from 'localforage'
-import { isEmpty, trim, replace } from 'lodash'
+import { isEmpty, trim, replace, forEach, concat, uniqBy } from 'lodash'
 import utils from '@utils/client'
 import { setToken as setAjaxToken } from '@/plugins/http'
 import config from '@/config'
@@ -63,6 +63,9 @@ export default {
   get user () {
     return vuex.state.auth.user
   },
+  get permissions () {
+    return vuex.state.auth.permissions
+  },
   async login (payload) {
     const params = loginCheck(payload)
     if (!params) return false
@@ -88,6 +91,22 @@ export default {
       res = await api.me.index()
     }
     vuex.dispatch('setUser', res.data || res)
+    if (config.hasPermissions) {
+      this.setPermissions()
+    }
+  },
+  async setPermissions () {
+    if (!this.permissions) {
+      let permissions = []
+      const res = await api.me.get('permissions')
+      if (res.data) {
+        forEach(res.data[1], (roles) => {
+          permissions = concat(permissions, roles.permissions)
+        })
+        permissions = uniqBy(permissions, 'id')
+      }
+      await vuex.dispatch('setPermissions', permissions)
+    }
   },
   async hasScope (scope = 'is_admin') {
     if (isEmpty(this.user)) {

@@ -13,6 +13,7 @@ export default {
       email: '请输入有效的邮箱。',
       password: '请输入有效的密码。'
     },
+    alreadyLoggedIn: '您已经成功登录。',
     welcomeBack: '登录成功，欢迎回来。',
     logout: '退出成功!'
   },
