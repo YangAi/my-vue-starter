@@ -14,7 +14,8 @@ module.exports = {
       '@utils': resolve('src/utils'),
       '@vuex': resolve('src/vuex'),
       '@api': resolve('src/services/api'),
-      '@style': resolve('src/assets/style')
+      '@style': resolve('src/assets/style'),
+      '@config': resolve('src/config')
     }
   }
 }

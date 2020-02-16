@@ -30,8 +30,8 @@ const getFormattedDate = (timeStamp, format = 'datetime', includeYear = true) =>
   const day = maintainNumLength(d.getDate())
   const hour = maintainNumLength(d.getHours())
   const minute = maintainNumLength(d.getMinutes())
-  let output = includeYear ? '/' + year : ''
-  output = `${month}/${day}${output}`
+  let output = includeYear ? year + '-' : ''
+  output = `${output}${month}-${day}`
   if (format === 'datetime') {
     output = `${output} ${hour}:${minute}`
   }
@@ -70,6 +70,12 @@ export const getRelativeTime = (timeStamp) => {
 }
 
 export default function (timestamp, format = 'relative') {
+  // const now = new Date()
+  const time = new Date(timestamp)
+  timestamp = timestamp - (time.getTimezoneOffset() + 8 * 60) * 60000
+
+  // make sure the summer time won't affect the output timestamp
+  // timestamp = timestamp + (now.getTimezoneOffset() - time.getTimezoneOffset()) * 60000
   if (format === 'date' || format === 'datetime') {
     return getFormattedDate(timestamp, format)
   } else {

@@ -12,6 +12,5 @@ Vue.prototype._ = lodash
 Vue.prototype.$storage = localforage
 Vue.prototype.$auth = auth
 Vue.prototype.$api = api
-// Vue.prototype.$toast = VNoty
 Vue.prototype.$config = config
 Vue.prototype.$utils = utils

@@ -55,7 +55,7 @@ export function loginCheck (payload) {
 
 export default {
   get token () {
-    return isEmpty(vuex.state.auth.token) ? false : vuex.state.auth.token
+    return vuex.state.auth.token ? vuex.state.auth.token : false
   },
   get loggedIn () {
     return !!this.token
@@ -77,13 +77,12 @@ export default {
     }
   },
   async logout () {
-    let res = await api[config.authResource].destroy('')
-    if (res) {
+    try {
       await this.removeToken()
+      api[config.authResource].destroy('')
       Vue.$toast.success(i18n.t('messages.auth.logout'))
-      return res
-      // TODO might have bug with router refresh
-      // router.go(0)
+      await router.push('/')
+    } catch (e) {
     }
   },
   async setUser (res) {
@@ -109,7 +108,7 @@ export default {
         })
         await vuex.dispatch('setPermissions', permissions)
       } else {
-        Vue.$toast.error(res.message)
+        Vue.$toast.error(res.message || 'Error')
       }
     }
   },
@@ -163,13 +162,14 @@ export default {
     }
   },
   async removeToken () {
-    const result = await localforage.removeItem('token')
-    if (result) {
-      // !NOTE  ajax token not delete
+    try {
+      await localforage.removeItem('token')
       vuex.dispatch('setToken', null)
       vuex.dispatch('setUser', {})
       setAjaxToken(false)
       router.go(-1)
+    } catch (e) {
+      console.log(e)
     }
   }
 }

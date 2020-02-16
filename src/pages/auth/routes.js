@@ -14,7 +14,7 @@ export default [
   {
     path: '/auth/login',
     name: 'Auth.Login',
-    component: () => import('./LoginFront.vue'),
+    component: () => import('./LoginDashboard.vue'),
     beforeEnter: async (to, from, next) => {
       await authCheck(next)
     },

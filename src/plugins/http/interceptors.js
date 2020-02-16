@@ -30,7 +30,9 @@ export default http => {
       switch (error.response.status) {
         case 401:
           Vue.$toast.error(error.response.data.message || i18n.t('messages.http.error401'))
-          Auth.logout()
+          if (error.response.config.headers.Authorization) {
+            await Auth.logout()
+          }
           break
         case 403:
           Vue.$toast.error(error.response.data.message || i18n.t('messages.http.error403'))

@@ -10,10 +10,10 @@ const languageText = {
     before: '前',
     after: '后',
     justNow: '刚刚',
-    second: '秒',
-    minute: '分钟',
-    hour: '小时',
-    day: '天'
+    second: val => val + '秒',
+    minute: val => val + '分钟',
+    hour: val => val + '小时',
+    day: val => val + '天'
   },
   en: {
     before: ' Ago',

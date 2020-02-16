@@ -1,11 +1,9 @@
-import actions from './actions'
-import messages from './messages'
-import pages from './pages'
-import validation from './validation'
+import actions from './actions.js'
+import messages from './messages.js'
+import validation from './validation.js'
 
 export default {
   actions,
   messages,
-  pages,
   validation
 }

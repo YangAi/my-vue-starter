@@ -5,8 +5,6 @@ import store from './store'
 import i18n from './locales'
 
 import '@plugins/plugins'
-import '@plugins/nprogress'
-import '@plugins/prototypes'
 
 import '@style/index.scss'
 import './registerServiceWorker'
