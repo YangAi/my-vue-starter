@@ -7,6 +7,8 @@ async function authCheck (next) {
   if (Auth.token && Auth.user) {
     Vue.$toast.info(i18n.t('messages.auth.alreadyLoggedIn'))
     return next({ name: 'Me.Index' }) // redirect to login
+  } else {
+    next()
   }
 }
 
