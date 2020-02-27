@@ -1,7 +1,6 @@
 <template>
   <v-text-field v-bind="$attrs"
                 :type="innerType"
-                :step="field.type === 'decimal' ? 0.01 : 1"
                 v-model="innerValue"
                 @blur="$emit('blur', innerValue)"
                 @click="$emit('click', innerValue)"
@@ -29,7 +28,7 @@ export default {
         integer: 'number',
         email: 'email'
       }
-      return map[this.field.type] || 'text'
+      return this.field ? map[this.field.type] || 'text' : 'text'
     }
   }
 }

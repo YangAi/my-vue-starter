@@ -19,4 +19,3 @@ export default {
   isMin: (value, min) => isEmpty(value) || (isNumber(value) && isNumber(min) ? (value >= min || i18n.t('validation.isMin')) : i18n.t('validation.isNumber')),
   isInRange: (value, min, max) => isEmpty(value) || (isNumber(parseFloat(value)) && isNumber(min) && isNumber(max) ? ((value >= min && value <= max) || i18n.t('validation.isInRange')) : i18n.t('validation.isNumber'))
 }
-g

@@ -1,35 +1,35 @@
 <template>
-  <v-container fluid class="h-full p-0">
-    <v-row no-gutters class="img-container bg-white">
-      <v-col cols="12" md="6">
-        <v-img src="https://area.sinaapp.com/bingImg/" class="img-container" />
-      </v-col>
-      <v-col cols="12" md="6">
-        <v-container v-if="$route.query.message">
-          <v-alert type="info">Please sign in first.</v-alert>
-        </v-container>
-        <v-container class="content-container">
-          <h1 class="display-1 mb-8">Sign In</h1>
-          <v-form ref="form" class="mb-4" style="max-width: 300px">
-            <v-text-field v-model="form.username" label="Username" :rules="[rules.isRequired]" />
-            <v-text-field v-model="form.password" label="Password"
-                          :type="showPassword ? 'text' : 'password'"
-                          :append-icon="showPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
-                          @click:append="showPassword = !showPassword"
+  <main>
+    <v-container v-if="$route.query.message">
+      <v-alert type="warning">Please sign in first.</v-alert>
+    </v-container>
+    <v-container class="content-container">
+      <v-sheet class="tw-m-auto" style="max-width: 360px">
+        <h1 class="display-2 mb-8 tw-text-center">Sign In</h1>
+        <v-form ref="form" class="mb-4">
+          <text-field filled v-model="form.username" label="Username" :rules="[rules.isRequired]" />
+          <password-field filled v-model="form.password" label="Password"
                           :rules="[rules.isRequired]" />
-          </v-form>
-          <v-btn elevation="0" @click.native="submit" color="primary" :loading="loading">Submit</v-btn>
-          <router-link :to="{'name': 'Home.Index'}" class="caption absolute bottom-0 flex items-center text-gray-700 mb-8"><v-icon small class="mr-2 text-gray-700">mdi-arrow-left</v-icon> Back to Homepage</router-link>
-        </v-container>
-      </v-col>
-    </v-row>
-  </v-container>
+        </v-form>
+        <v-card-actions>
+          <span>Forgot Password?</span>
+          <v-spacer />
+          <v-btn large elevation="6" @click.native="submit" color="primary" :loading="loading">
+            <span class="tw-capitalize tw-text-lg mx-4">Sign In</span>
+          </v-btn>
+        </v-card-actions>
+      </v-sheet>
+    </v-container>
+  </main>
 </template>
 
 <script>
 import rules from '@utils/validation'
+import PasswordField from '@components/inputFields/PasswordField'
+import TextField from '@components/inputFields/TextField'
 export default {
   name: 'Login',
+  components: { TextField, PasswordField },
   data () {
     return {
       visible: false,

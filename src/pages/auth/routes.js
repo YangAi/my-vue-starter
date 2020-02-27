@@ -14,15 +14,21 @@ async function authCheck (next) {
 
 export default [
   {
-    path: '/auth/login',
-    name: 'Auth.Login',
-    component: () => import('./LoginDashboard.vue'),
+    path: '/auth',
+    component: () => import('./layouts/AuthLayout'),
     beforeEnter: async (to, from, next) => {
       await authCheck(next)
     },
-    meta: {
-      auth: false,
-      title: 'Login'
-    }
+    children: [
+      {
+        path: 'login',
+        name: 'Auth.Login',
+        component: () => import('./LoginDashboard.vue'),
+        meta: {
+          auth: false,
+          title: 'Login'
+        }
+      }
+    ]
   }
 ]
