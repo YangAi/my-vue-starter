@@ -30,8 +30,8 @@ const getFormattedDate = (timeStamp, format = 'datetime', includeYear = true) =>
   const day = maintainNumLength(d.getDate())
   const hour = maintainNumLength(d.getHours())
   const minute = maintainNumLength(d.getMinutes())
-  let output = includeYear ? year + '-' : ''
-  output = `${output}${month}-${day}`
+  let output = includeYear ? '/' + year : ''
+  output = `${month}/${day}${output}`
   if (format === 'datetime') {
     output = `${output} ${hour}:${minute}`
   }

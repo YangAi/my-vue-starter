@@ -6,7 +6,7 @@
                 <slot />
             </span>
         </template>
-        <span>{{ time }}</span>
+        <span :class="textClass">{{ time }}</span>
     </v-tooltip>
     <component v-else :is="tag">
         {{ date }}
@@ -15,6 +15,7 @@
 </template>
 <script>
 import Time from './time'
+import dayjs from 'dayjs'
 export default {
   name: 'Time',
   props: {
@@ -40,6 +41,9 @@ export default {
     interval: {
       type: Number,
       default: 60
+    },
+    textClass: {
+      type: String
     }
   },
   mounted () {
@@ -58,17 +62,17 @@ export default {
   },
   methods: {
     setTime () {
-      const type = typeof this.time
-      let time
-      if (type === 'number') {
-        const timestamp = this.time.toString().length > 10 ? this.time : this.time * 1000
-        time = (new Date(timestamp)).getTime()
-      } else if (type === 'object') {
-        time = this.time.getTime()
-      } else if (type === 'string') {
-        time = (new Date(this.time.replace(/-/g, '/'))).getTime()
-      }
-      this.date = Time(time, this.type)
+      // const type = typeof this.time
+      // this.date =
+      // if (type === 'number') {
+      //   const timestamp = this.time.toString().length > 10 ? this.time : this.time * 1000
+      //   time = (new Date(timestamp)).getTime()
+      // } else if (type === 'object') {
+      //   time = this.time.getTime()
+      // } else if (type === 'string') {
+      //   time = (new Date(this.time.replace(/-/g, '/'))).getTime()
+      // }
+      this.date = Time(dayjs(this.time), this.type)
     }
   }
 }
