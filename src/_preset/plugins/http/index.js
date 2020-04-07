@@ -1,6 +1,6 @@
 import axios from 'axios'
 import interceptors from './interceptors'
-import config from '@/config'
+import config from '@config'
 
 // allow use http client without Vue instance
 const http = axios.create({

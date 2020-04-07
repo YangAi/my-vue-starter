@@ -1,4 +1,4 @@
-import http from '@/plugins/http'
+import http from '@preset/plugins/http'
 
 export default class Resource {
   constructor (baseUri) {

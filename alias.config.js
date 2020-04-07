@@ -3,6 +3,7 @@ const resolve = dir => require('path').join(__dirname, dir)
 module.exports = {
   resolve: {
     alias: {
+      '@preset': resolve('src/_preset'),
       '@': resolve('src'),
       '@src': resolve('src'),
       '@plugins': resolve('src/plugins'),
@@ -13,7 +14,7 @@ module.exports = {
       '@assets': resolve('src/assets'),
       '@utils': resolve('src/utils'),
       '@vuex': resolve('src/vuex'),
-      '@api': resolve('src/services/api'),
+      '@api': resolve('src/api'),
       '@style': resolve('src/assets/style'),
       '@config': resolve('src/config')
     }

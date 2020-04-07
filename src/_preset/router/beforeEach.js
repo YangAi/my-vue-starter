@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import NProgress from 'nprogress'
 // import { isEmpty } from 'lodash'
-import Auth from '@/plugins/auth'
-import i18n from '@/locales'
+import Auth from '@preset/plugins/auth'
+import i18n from '@preset/locales'
 
 const beforeEach = async (to, from, next) => {
   NProgress.start()

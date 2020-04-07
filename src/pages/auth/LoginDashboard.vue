@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import rules from '@utils/validation'
-import PasswordField from '@components/inputFields/PasswordField'
-import TextField from '@components/inputFields/TextField'
+import rules from '@preset/utils/validation'
+import PasswordField from '@preset/components/inputFields/PasswordField'
+import TextField from '@preset/components/inputFields/TextField'
 export default {
   name: 'Login',
   components: { TextField, PasswordField },

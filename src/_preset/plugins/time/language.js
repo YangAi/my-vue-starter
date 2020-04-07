@@ -1,4 +1,4 @@
-import config from '@/config'
+import config from '@config'
 const language = config.language
 
 function formatTime (time, type) {

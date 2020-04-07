@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import rules from '@utils/validation'
-import PasswordField from '../../components/inputFields/PasswordField'
+import rules from '@preset/utils/validation'
+import PasswordField from '../../_preset/components/inputFields/PasswordField'
 export default {
   name: 'Login',
   components: { PasswordField },

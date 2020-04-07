@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import Auth from '@/plugins/auth'
-import i18n from '@/locales'
+import Auth from '@preset/plugins/auth'
+import i18n from '@preset/locales'
 
 async function authCheck (next) {
   await Auth.getToken()

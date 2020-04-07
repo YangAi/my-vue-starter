@@ -1,5 +1,5 @@
-import Resource from './resource'
-import config from '@/config'
+import Resource from '@preset/services/api/resource'
+import config from '@config'
 
 let resource = {
   me: new Resource('/me')

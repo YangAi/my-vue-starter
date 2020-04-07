@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import Auth from '@/plugins/auth'
+import Auth from '@preset/plugins/auth'
 import { isEmpty } from 'lodash'
-import i18n from '@/locales'
+import i18n from '@preset/locales'
 
 export default http => {
   http.interceptors.request.use(

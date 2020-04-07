@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import vuex from './vuex'
-import api from '@/services/api'
-import router from '@/router'
+import api from '@api'
+import router from '@router'
 import localforage from 'localforage'
 import { isEmpty, trim, replace, forEach, concat, uniqBy } from 'lodash'
-import utils from '@utils/client'
-import { setToken as setAjaxToken } from '@/plugins/http'
-import config from '@/config'
-import i18n from '@/locales'
+import utils from '@preset/utils/client'
+import { setToken as setAjaxToken } from '@preset/plugins/http'
+import config from '@config'
+import i18n from '@preset/locales'
 
 export function loginCheck (payload) {
   if ((!payload.phone && !payload.email && !payload.account && !payload.username) || (!payload.password && !payload.code)) {

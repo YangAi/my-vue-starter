@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import baseMixins from '@components/inputFields/baseMixins'
+import baseMixins from '@preset/preset/components/inputFields/baseMixins'
 import '@style/quill.scss'
 import VueCoreImageUpload from 'vue-core-image-upload'
 import { quillEditor } from 'vue-quill-editor'

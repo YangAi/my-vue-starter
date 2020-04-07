@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { isNumber } from 'lodash'
-import utils from '@utils/client'
-import i18n from '@/locales'
+import utils from '@preset/utils/client'
+import i18n from '@preset/locales'
 
 function isEmpty (value) {
   return (value === '') || (value === undefined)
