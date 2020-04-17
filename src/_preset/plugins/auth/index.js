@@ -25,7 +25,7 @@ export function loginCheck (payload) {
     return false
   }
 
-  let params = {}
+  const params = {}
 
   if (payload.username) {
     params.username = payload.username
@@ -69,7 +69,7 @@ export default {
   async login (payload) {
     const params = loginCheck(payload)
     if (!params) return false
-    let res = await api[config.authResource].store(params)
+    const res = await api[config.authResource].store(params)
     if (res) {
       this.setToken(res.token || res.access_token || res.data.token || res.data.access_token)
       Vue.$toast.success(i18n.t('messages.auth.welcomeBack'))
@@ -96,7 +96,7 @@ export default {
   },
   async setPermissions () {
     if (!this.permissions) {
-      let permissions = {}
+      const permissions = {}
       const res = await api.me.get('permissions')
       if (res.code === 0) {
         forEach(res.data, (group, key) => {
@@ -138,7 +138,7 @@ export default {
     if (this.token) {
       return this.token
     } else {
-      let token = await localforage.getItem('token')
+      const token = await localforage.getItem('token')
       if (token) {
         await this.setToken(token)
         return token

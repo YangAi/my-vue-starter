@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     innerField () {
-      let field = this.field
+      const field = this.field
       field.type = this.showPassword ? 'text' : 'password'
       return field
     }

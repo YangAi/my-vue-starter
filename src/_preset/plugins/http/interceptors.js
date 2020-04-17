@@ -24,7 +24,7 @@ export default http => {
       return isEmpty(response.data) ? true : response.data
     },
     async error => {
-      if (!error['response']) {
+      if (!error.response) {
         return Promise.reject(error)
       }
       switch (error.response.status) {

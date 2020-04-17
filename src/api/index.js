@@ -1,7 +1,7 @@
 import Resource from '@preset/services/api/resource'
 import config from '@config'
 
-let resource = {
+const resource = {
   me: new Resource('/me')
   // events: new Resource('/events')
 }
