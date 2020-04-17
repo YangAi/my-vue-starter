@@ -4,15 +4,8 @@ import state from './state'
 import mutations from './mutations'
 import * as actions from './actions'
 
-const module = {
-  auth: {
-    state,
-    mutations,
-    actions
-  }
+export default {
+  state,
+  mutations,
+  actions
 }
-
-Vue.use(Vuex)
-export default new Vuex.Store({
-  modules: module
-})

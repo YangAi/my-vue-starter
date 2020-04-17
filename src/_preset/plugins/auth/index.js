@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import vuex from './vuex'
+import vuex from '@/store'
 import api from '@api'
 import router from '@router'
 import localforage from 'localforage'
