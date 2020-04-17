@@ -4,7 +4,7 @@ import utils from '@preset/utils/client'
 import i18n from '@preset/locales'
 
 function isEmpty (value) {
-  return (value === '') || (value === undefined)
+  return (value === '') || (value === undefined) || (value === null)
 }
 
 export default {
