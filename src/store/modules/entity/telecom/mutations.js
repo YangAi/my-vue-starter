@@ -10,7 +10,8 @@ export default {
     state.employee += employeeChange
     rootState['telecom/employee'] += employeeChange
     
-    // This is the Vuex auto-complete option. I think Webstorm might have some trouble recongize whether the "state" argument is the module state, or rootState.  
+    // This is the Vuex auto-complete option.
+    // I think Webstorm might have some trouble recongize whether the "state" argument is the module state, or rootState.  
     state['telecom/employee'] += employeeChange
   },
   [types.SET_TELECOM_PRICE] (state, newPrice) {
