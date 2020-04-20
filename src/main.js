@@ -3,12 +3,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import i18n from '@preset/locales'
+import vuetify from '@preset/plugins/vuetify'
 
 import '@preset/plugins/plugins'
 
 import '@preset/style/index.scss'
 import './registerServiceWorker'
-import vuetify from '@preset/plugins/vuetify'
+
+// import base component for this project
+import '@components/base'
 
 Vue.config.productionTip = false
 

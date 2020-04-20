@@ -1,0 +1,92 @@
+body, .v-application {
+  font-family: $base-font-family;
+}
+
+.theme--light.v-text-field.v-text-field--filled {
+  .v-input__control > .v-input__slot {
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.03);
+    &::before {
+      border-color: transparent;
+    }
+    .v-label {
+      color: rgba(0, 0, 0, 0.52)
+    }
+  }
+}
+
+.container {
+  padding: 16px;
+  &.container--fluid {
+    max-width: 100%;
+  }
+}
+.v-divider {
+  border-color: #e2e8f0!important;
+}
+.v-app-bar.bordered {
+  @apply border-b border-solid border-gray-200;
+}
+.v-tab {
+  min-width: 0;
+  margin: 0 0 0 16px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  &:before {
+    background-color: transparent;
+  }
+}
+
+.v-tabs-slider-wrapper {
+  height: 4px!important;
+}
+
+.v-subheader + .container {
+  padding-top: 0;
+}
+
+.v-card__text + .v-card__text {
+  padding-top: 0;
+}
+
+.v-card__subtitle + .v-card__title {
+  margin-top: -16px;
+  padding-top: 0;
+}
+.v-card__title + .container, .v-card__text + .v-card__actions{
+  padding-top: 0;
+}
+
+.v-card__actions {
+  padding-top: 16px;
+  padding-right: 16px !important;
+  padding-bottom: 16px;
+  padding-left: 16px !important;
+}
+.v-dialog > .v-card > .v-card__actions {
+  padding: 0 24px 20px;
+}
+
+.theme--light.v-chip:not(.v-chip--active) {
+  background: transparent;
+  border: 1px solid;
+  @apply border-gray-300;
+}
+
+.v-tab, .v-expansion-panel-header {
+  font-weight: 500;
+}
+.v-btn {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.v-btn + .v-btn {
+  @apply ml-2;
+}
+
+.v-chip {
+  font-weight: 500;
+}
+
