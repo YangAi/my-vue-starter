@@ -47,6 +47,10 @@ body, .v-application {
   padding-top: 0;
 }
 
+.v-card{
+  overflow: hidden;
+}
+
 .v-card__text + .v-card__text {
   padding-top: 0;
 }

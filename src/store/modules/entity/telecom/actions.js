@@ -1,11 +1,24 @@
 import * as types from '../../mutation-types'
 
 export default {
-  recruitEmployee ({ commit, state }) {
-    commit(types.CHANGE_TELECOM_EMPLOYEE, state.parameters.employeeUnit)
+  async recruitEmployee ({ commit, state, dispatch }) {
+    if (await dispatch(
+      'company/spendCash',
+      state.parameters.unit.employee * state.parameters.cost.employee,
+      { root: true }
+    )) {
+      commit(types.CHANGE_TELECOM_EMPLOYEE, state.parameters.unit.employee)
+    }
   },
-  cutDownEmployee ({ commit, state }) {
-    commit(types.CHANGE_TELECOM_EMPLOYEE, -state.parameters.employeeUnit)
+  async cutDownEmployee ({ commit, state, dispatch }) {
+    const employeeCount = state.employee < state.parameters.unit.employee ? state.employee : state.parameters.unit.employee
+    if (await dispatch(
+      'company/spendCash',
+      employeeCount * state.parameters.cost.employee,
+      { root: true }
+    )) {
+      commit(types.CHANGE_TELECOM_EMPLOYEE, -employeeCount)
+    }
   },
   setPrice ({ commit }, price) {
     commit(types.SET_TELECOM_PRICE, price)

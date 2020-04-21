@@ -1,4 +1,5 @@
-export const CHANGE_CASH = 'Change Cash'
+export const EARN_CASH = 'Earn Cash'
+export const SPEND_CASH = 'Spend Cash'
 
 // Telecom
 export const START_TELECOM_BUSINESS = 'Record the date business start'

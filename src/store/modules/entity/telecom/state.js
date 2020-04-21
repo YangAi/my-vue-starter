@@ -5,7 +5,7 @@ export default {
       invest: 1
     },
     cost: {
-      employee: 10 ^ 4
+      employee: 5000
     }
   },
   info: {

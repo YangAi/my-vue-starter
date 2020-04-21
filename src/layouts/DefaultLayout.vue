@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
     <v-navigation-drawer
         v-model="layout.drawer"
         app
@@ -23,30 +23,39 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
     <v-app-bar
         app
         color="indigo"
         dark
+        fade-img-on-scroll
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>
-        {{'城市模拟'}}
-      </v-toolbar-title>
+      公司现金：
+      <v-card light class="px-4">
+        <g-number :number="$store.state.company.cash" prefix="¥" />
+      </v-card>
       <v-spacer />
-      <v-btn @click="time.stop = !time.stop">{{ time.stop ? '继续' : '暂停' }}游戏</v-btn>
+      <v-app-bar-nav-icon @click.stop="layout.drawer = !layout.drawer" />
     </v-app-bar>
 
     <v-content>
       <router-view ref="content" :game="gameOutput" />
     </v-content>
 
+    <v-btn fab dark class="tw-fixed" style="bottom: 48px; right: 16px" @click="time.stop = !time.stop">
+      <v-icon color="white">
+        {{ time.stop ? 'mdi-play' : 'mdi-pause' }}
+      </v-icon>
+    </v-btn>
+
     <v-footer
         color="indigo"
+        class="tw-items-center"
         app
     >
       <v-spacer />
-      <span class="white--text">&copy; {{ gameOutput.date }}</span>
+      <v-card class="tw-px-2">
+        {{ gameOutput.date }}
+      </v-card>
     </v-footer>
   </v-app>
 </template>

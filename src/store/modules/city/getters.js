@@ -27,5 +27,11 @@ export default {
       })
     }
     return output
+  },
+  internetRate: state => {
+    return (state.population.internetUser / state.population.total) || 0
+  },
+  internetQualityIndex: (state, getters, rootState) => {
+    return rootState.telecom.networkQuality
   }
 }

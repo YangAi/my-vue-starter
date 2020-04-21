@@ -1,3 +1,3 @@
 export default {
-  cash: 1000000
+  cash: 100000000
 }
